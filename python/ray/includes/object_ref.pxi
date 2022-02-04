@@ -167,7 +167,8 @@ cdef class ClientObjectRef(ObjectRef):
 
     def __dealloc__(self):
         client_worker = self._client_worker_ref()
-        if client_worker is not None and client_worker.is_connected():
+        if client is not None and client_worker is not None and \
+           client_worker.is_connected():
             try:
                 self._wait_for_id()
             # cython would suppress this exception as well, but it tries to
